@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\WorkflowSddHarness.Application\WorkflowSddHarness.Application.csproj" />
+    <ProjectReference Include="..\WorkflowSddHarness.Infrastructure\WorkflowSddHarness.Infrastructure.csproj" />
+    <ProjectReference Include="..\WorkflowSddHarness.Domain\WorkflowSddHarness.Domain.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
