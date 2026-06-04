@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "paths": {
+    "specsRoot": ".specs/features",
+    "rules": ".harness/rules",
+    "state": ".specs/project/STATE.md",
+    "observability": ".harness/observability",
+    "src": "src"
+  },
+  "providers": {
+    "claude": {
+      "enabled": true,
+      "cmd": "claude",
+      "headlessFlag": "-p",
+      "modelFlag": "--model",
+      "installHint": "Instale via: npm install -g @anthropic-ai/claude-code (aten\u00e7\u00e3o: requer Node.js \u226518)"
+    }
+  },
+  "effortMap": {
+    "claude": {
+      "high": "claude-opus-4-8",
+      "medium": "claude-sonnet-4-6",
+      "low": "claude-haiku-4-5"
+    }
+  },
+  "steps": {
+    "design": { "provider": "claude", "effort": "high", "maxTokens": 12000 },
+    "execute": { "provider": "claude", "effort": "medium", "maxTokens": 6000 }
+  },
+  "rules": { "apply": ["architecture", "testing"] },
+  "gates": {
+    "coverage": { "enabled": true, "policy": "WARN" },
+    "lintTasks": { "enabled": true, "policy": "HALT" }
+  }
+}

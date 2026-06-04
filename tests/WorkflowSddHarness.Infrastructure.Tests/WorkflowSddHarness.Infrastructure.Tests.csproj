@@ -24,4 +24,10 @@
     <ProjectReference Include="..\..\src\WorkflowSddHarness.Infrastructure\WorkflowSddHarness.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="Fixtures\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

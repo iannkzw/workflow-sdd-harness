@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HarnessConfig",
+  "description": "Workflow SDD Harness configuration schema v1",
+  "type": "object",
+  "required": ["version", "paths", "providers"],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "paths": {
+      "type": "object",
+      "properties": {
+        "specsRoot": { "type": "string" },
+        "rules": { "type": "string" },
+        "state": { "type": "string" },
+        "observability": { "type": "string" },
+        "src": { "type": "string" }
+      }
+    },
+    "providers": {
+      "type": "object"
+    },
+    "effortMap": {
+      "type": "object"
+    },
+    "steps": {
+      "type": "object"
+    },
+    "rules": {
+      "type": "object"
+    },
+    "gates": {
+      "type": "object"
+    }
+  }
+}
