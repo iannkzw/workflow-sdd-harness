@@ -6,6 +6,10 @@
     <ProjectReference Include="..\WorkflowSddHarness.Domain\WorkflowSddHarness.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.CommandLine" Version="2.0.8" />
+  </ItemGroup>
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
