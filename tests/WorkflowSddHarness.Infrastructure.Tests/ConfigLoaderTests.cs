@@ -77,4 +77,15 @@ public class ConfigLoaderTests
         Assert.NotEmpty(result.Config.Providers);
         Assert.NotEmpty(result.Config.Steps);
     }
+
+    [Fact]
+    public void Load_WhenConfigHasAccentedStrings_KeepsThemIntact()
+    {
+        var result = _loader.Load(FixturePath("config.valid.json"));
+
+        Assert.True(result.IsSuccess);
+        var installHint = result.Config!.Providers["claude"].InstallHint;
+        Assert.Contains("atenção", installHint, StringComparison.Ordinal);
+        Assert.Contains("≥", installHint, StringComparison.Ordinal);
+    }
 }
