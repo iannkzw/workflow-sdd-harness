@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "paths": {
+    "specsRoot": ".specs/features",
+    "rules": ".harness/rules",
+    "state": ".specs/project/STATE.md",
+    "observability": ".harness/observability",
+    "src": "src"
+  }
+}
