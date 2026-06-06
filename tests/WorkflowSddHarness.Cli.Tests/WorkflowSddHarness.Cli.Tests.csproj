@@ -24,4 +24,11 @@
     <ProjectReference Include="..\..\src\WorkflowSddHarness.Cli\WorkflowSddHarness.Cli.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="..\WorkflowSddHarness.Infrastructure.Tests\Fixtures\**">
+      <Link>Fixtures\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
