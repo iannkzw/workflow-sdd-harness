@@ -488,6 +488,12 @@ $RECYCLE.BIN/
 # Instruções locais para o Claude Code — não versionado (cada dev tem o seu)
 CLAUDE.md
 
+# Configuração local de testes (env vars, ex.: HARNESS_E2E=1) — não versionado
+*.runsettings
+
+# Configurações locais do VS Code — não versionado
+.vscode/
+
 # .specs/ NÃO é versionado. Contém artefatos de planejamento spec-driven com
 # caminhos absolutos de máquina local (C:\Users\...) e material de processo —
 # este é um repositório PÚBLICO e só deve conter o código do produto.
