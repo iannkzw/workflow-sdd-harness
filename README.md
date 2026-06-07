@@ -67,20 +67,13 @@ Todos os testes usam o `WorkflowSddHarness.StubCli` como substituto determiníst
 
 ### Smoke opt-in (contra o `claude` real)
 
-Requer: `claude` no PATH e autenticado + variável de ambiente `HARNESS_E2E=1`.
+Requer: `claude` no PATH e autenticado.
 
 ```bash
-# PowerShell
-$env:HARNESS_E2E = "1"
 dotnet test WorkflowSddHarness.sln --filter "Category=RealCli"
 ```
 
-```bash
-# Bash / CI
-HARNESS_E2E=1 dotnet test WorkflowSddHarness.sln --filter "Category=RealCli"
-```
-
-O teste auto-pula (`Skipped`) quando `claude` não está no PATH **ou** `HARNESS_E2E` não está setado, então a categoria pode ser omitida no filtro padrão sem efeito negativo.
+O teste auto-pula (`Skipped`) quando `claude` não está no PATH, então a categoria pode ser omitida no filtro padrão sem efeito negativo.
 
 ---
 
@@ -88,7 +81,7 @@ O teste auto-pula (`Skipped`) quando `claude` não está no PATH **ou** `HARNESS
 
 Execute o smoke opt-in uma vez com o `claude` real logado e cole o JSON observado abaixo como evidência de contrato.
 
-- [ ] `HARNESS_E2E=1 dotnet test --filter "Category=RealCli"` → `1 passed`
+- [ ] `dotnet test --filter "Category=RealCli"` com `claude` no PATH → `1 passed`
 - [ ] `IsSuccess = true` no resultado
 - [ ] `Text` não vazio e com acentos íntegros (ex.: `ç`, `ã`, `é`, `—`)
 - [ ] Campos `result` e `usage` presentes na resposta JSON crua
