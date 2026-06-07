@@ -1,6 +1,6 @@
 namespace WorkflowSddHarness.Infrastructure.CodingAgents;
 
-internal sealed record ProcessRunResult
+public sealed record ProcessRunResult
 {
     public bool Started { get; init; }
     public string StdOut { get; init; } = "";

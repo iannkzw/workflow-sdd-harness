@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WorkflowSddHarness.Infrastructure.CodingAgents;
 
-internal sealed class CodingAgentRunner
+public sealed class CodingAgentRunner
 {
     private static readonly UTF8Encoding Utf8NoBom = new(encoderShouldEmitUTF8Identifier: false);
 
