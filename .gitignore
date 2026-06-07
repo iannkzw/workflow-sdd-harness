@@ -485,6 +485,9 @@ $RECYCLE.BIN/
 ##  Workflow SDD Harness — regras do projeto
 ## ──────────────────────────────────────────────────────────────────
 
+# Instruções locais para o Claude Code — não versionado (cada dev tem o seu)
+CLAUDE.md
+
 # .specs/ NÃO é versionado. Contém artefatos de planejamento spec-driven com
 # caminhos absolutos de máquina local (C:\Users\...) e material de processo —
 # este é um repositório PÚBLICO e só deve conter o código do produto.
