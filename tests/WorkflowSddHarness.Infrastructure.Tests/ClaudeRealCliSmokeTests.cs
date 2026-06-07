@@ -4,6 +4,23 @@ using WorkflowSddHarness.Infrastructure.CodingAgents.Claude;
 
 namespace WorkflowSddHarness.Infrastructure.Tests;
 
+sealed class RealCliFactAttribute : FactAttribute
+{
+    public RealCliFactAttribute()
+    {
+        if (!IsClaudeInPath())
+            Skip = "Skipped: claude not in PATH";
+    }
+
+    private static bool IsClaudeInPath() =>
+        (Environment.GetEnvironmentVariable("PATH") ?? "")
+        .Split(Path.PathSeparator)
+        .Any(dir =>
+            File.Exists(Path.Combine(dir, "claude")) ||
+            File.Exists(Path.Combine(dir, "claude.exe")) ||
+            File.Exists(Path.Combine(dir, "claude.cmd")));
+}
+
 [Trait("Category", "RealCli")]
 public class ClaudeRealCliSmokeTests
 {
@@ -16,22 +33,9 @@ public class ClaudeRealCliSmokeTests
 
     private static readonly CodingAgentRunner Runner = new();
 
-    private static bool IsClaudeInPath() =>
-        (Environment.GetEnvironmentVariable("PATH") ?? "")
-        .Split(Path.PathSeparator)
-        .Any(dir =>
-            File.Exists(Path.Combine(dir, "claude")) ||
-            File.Exists(Path.Combine(dir, "claude.exe")) ||
-            File.Exists(Path.Combine(dir, "claude.cmd")));
-
-    private static bool ShouldRun() =>
-        IsClaudeInPath() && Environment.GetEnvironmentVariable("HARNESS_E2E") == "1";
-
-    [SkippableFact]
+    [RealCliFact]
     public async Task RunAsync_RealClaude_AccentedPrompt_ReturnsSuccessWithUsage()
     {
-        Skip.IfNot(ShouldRun(), "Skipped: claude not in PATH or HARNESS_E2E != 1");
-
         var adapter = new ClaudeCliAdapter(RealConfig, Runner);
         var request = new CodingAgentRequest
         {
