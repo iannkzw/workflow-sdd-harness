@@ -28,10 +28,12 @@
   </ItemGroup>
 
   <Target Name="CopyStubCli" AfterTargets="Build">
-    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\WorkflowSddHarness.StubCli\bin\$(Configuration)\net8.0\WorkflowSddHarness.StubCli.exe"
+    <ItemGroup>
+      <StubCliFiles Include="$(MSBuildThisFileDirectory)..\WorkflowSddHarness.StubCli\bin\$(Configuration)\net8.0\WorkflowSddHarness.StubCli.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(StubCliFiles)"
           DestinationFolder="$(OutputPath)"
-          SkipUnchangedFiles="true"
-          Condition="Exists('$(MSBuildThisFileDirectory)..\WorkflowSddHarness.StubCli\bin\$(Configuration)\net8.0\WorkflowSddHarness.StubCli.exe')" />
+          SkipUnchangedFiles="true" />
   </Target>
 
   <ItemGroup>
