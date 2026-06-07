@@ -22,7 +22,19 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\WorkflowSddHarness.Infrastructure\WorkflowSddHarness.Infrastructure.csproj" />
+    <ProjectReference Include="..\WorkflowSddHarness.StubCli\WorkflowSddHarness.StubCli.csproj"
+                      ReferenceOutputAssembly="false"
+                      SkipGetTargetFrameworkProperties="true" />
   </ItemGroup>
+
+  <Target Name="CopyStubCli" AfterTargets="Build">
+    <ItemGroup>
+      <StubCliFiles Include="$(MSBuildThisFileDirectory)..\WorkflowSddHarness.StubCli\bin\$(Configuration)\net8.0\WorkflowSddHarness.StubCli.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(StubCliFiles)"
+          DestinationFolder="$(OutputPath)"
+          SkipUnchangedFiles="true" />
+  </Target>
 
   <ItemGroup>
     <Content Include="Fixtures\**">
