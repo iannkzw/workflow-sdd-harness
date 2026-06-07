@@ -57,23 +57,64 @@ src:         /caminho/para/seu-projeto/src
 
 ## Testes
 
+### Suíte padrão (sem `claude` instalado)
+
 ```bash
-dotnet test WorkflowSddHarness.sln
+dotnet test WorkflowSddHarness.sln --filter "Category!=RealCli"
 ```
+
+Todos os testes usam o `WorkflowSddHarness.StubCli` como substituto determinístico do `claude`. Roda offline, sem login e sem chave de API.
+
+### Smoke opt-in (contra o `claude` real)
+
+Requer: `claude` no PATH e autenticado + variável de ambiente `HARNESS_E2E=1`.
+
+```bash
+# PowerShell
+$env:HARNESS_E2E = "1"
+dotnet test WorkflowSddHarness.sln --filter "Category=RealCli"
+```
+
+```bash
+# Bash / CI
+HARNESS_E2E=1 dotnet test WorkflowSddHarness.sln --filter "Category=RealCli"
+```
+
+O teste auto-pula (`Skipped`) quando `claude` não está no PATH **ou** `HARNESS_E2E` não está setado, então a categoria pode ser omitida no filtro padrão sem efeito negativo.
+
+---
+
+## Checklist de E2E manual — fechamento do M1
+
+Execute o smoke opt-in uma vez com o `claude` real logado e cole o JSON observado abaixo como evidência de contrato.
+
+- [ ] `HARNESS_E2E=1 dotnet test --filter "Category=RealCli"` → `1 passed`
+- [ ] `IsSuccess = true` no resultado
+- [ ] `Text` não vazio e com acentos íntegros (ex.: `ç`, `ã`, `é`, `—`)
+- [ ] Campos `result` e `usage` presentes na resposta JSON crua
+
+**JSON observado (colar aqui após execução manual):**
+
+```json
+<!-- cole aqui o JSON bruto retornado pelo claude real -->
+```
+
+---
 
 ## Estrutura do projeto
 
 ```
 src/
-  WorkflowSddHarness.Domain/          # Modelo de domínio (HarnessConfig, etc.)
+  WorkflowSddHarness.Domain/          # Modelo de domínio (HarnessConfig, ICodingAgentPort, etc.)
   WorkflowSddHarness.Application/     # Casos de uso (vazio — features futuras)
-  WorkflowSddHarness.Infrastructure/  # Adapters: ConfigLoader, validators, paths
+  WorkflowSddHarness.Infrastructure/  # Adapters: ConfigLoader, validators, CodingAgentRunner, ClaudeCliAdapter
   WorkflowSddHarness.Cli/             # Ponto de entrada: CLI com System.CommandLine
 tests/
   WorkflowSddHarness.Domain.Tests/
   WorkflowSddHarness.Application.Tests/
   WorkflowSddHarness.Infrastructure.Tests/
   WorkflowSddHarness.Cli.Tests/
+  WorkflowSddHarness.StubCli/         # Fixture determinística (substitui o claude nos testes)
 ```
 
 ## Formato do config.json
